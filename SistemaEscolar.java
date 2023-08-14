@@ -45,7 +45,40 @@ public class SistemaEscolar {
 
     //cadastrar turma
     private void cadastrarTurma(){
+        Turma t = new Turma();
+        System.out.println("Cadastro de Turma");
+        System.out.println("Numero da Turma");
 
+        t.setNumeroTurma(Integer.parseInt(reader.readLine()));
+
+        System.out.println("Nome do Curso");
+        t.setNomeCurso(reader.readLine());
+        System.out.println("Ano");
+        t.setAno(Integer.parseInt(reader.readLine()));
+
+        System.out.println("----Alunos----");
+
+        for(int i = 0; i < 40; i++){
+            System.out.println("Nome:");
+            String nome = reader.readLine();
+            if(nome.equals('')){
+                break;
+            }
+            Aluno aluno = new Aluno();
+            aluno.setNome(nome);
+            System.out.println("Matricula");
+            aluno.setMatricula(reader.readLine());
+            System.out.println("Nota 1");
+            aluno.setNota1(Float.parseFloat(reader.readLine()));
+            System.out.println("Nota 2");
+            aluno.setNota2(Float.parseFloat(reader.readLine()));
+            System.out.println("Nota 3");
+            aluno.setNota3(Float.parseFloat(reader.readLine()));
+            System.out.println("Nota 4");
+            aluno.setNota4(Float.parseFloat(reader.readLine()));
+            t.setAluno(aluno);
+        }
+        this.e1.setTurma(t);
     }
 
     //listar turmas
