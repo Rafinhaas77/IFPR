@@ -58,4 +58,9 @@ public class Aluno{
     public void setNota4(float n4){
         this.nota4= n4;
     }    
+
+    public float calcularMedia(){
+        float media = (this.nota1 + this.nota2 + this.nota3 + this.nota4)/4;
+        return media;
+    }
 }

@@ -61,7 +61,7 @@ public class SistemaEscolar {
         for(int i = 0; i < 40; i++){
             System.out.println("Nome:");
             String nome = reader.readLine();
-            if(nome.equals('')){
+            if(nome.equals("")){
                 break;
             }
             Aluno aluno = new Aluno();
@@ -83,11 +83,36 @@ public class SistemaEscolar {
 
     //listar turmas
     private void listarTurmas(){
-
+        System.out.println("---------------------");
+        System.out.println("Relatorio de turma");
+        for(int i = 0; i < this.e1.getQtdeTurmas; i++){
+            System.out.println("Numero: " + this.e1.getTurma(i).getNumeroTurma()
+            + " - Curso: " + e1.getTurma(i).getNomeCurso()
+            + " - Ano: " + e1.getTurma(i).getAno());
+        }
     }
 
     //consultar turma
     private void consultarTurma(){
+        System.out.println("----------------------");
+        System.out.println("Consulta de turma");
+        System.out.println("Numero da turma");
+        int numTurma = Integer.parseInt(reader.readLine());
+        boolean achou = false;
 
+        for(int i = 0; i < this.e1.getQtdeTurmas(); i++){
+            Turma t = this.e1.getTurma();
+            if(t.getNumeroTurma() == numTurma){
+                System.out.println("Alunos da turma");
+                int posAluno = 0;
+                while(t.getAluno(posAluno) != null){
+                    String linha = "Nome: " + t.getAluno(posAluno).getNome();
+                    linha += "Matricula: " + t.getAluno(posAluno).getMatricula();
+                    linha += "Media: " + t.getAluno(posAluno).calcularMedia();
+                    System.out.println(linha);
+                    posAluno++;
+                }
+            }
+        }
     }
 }
