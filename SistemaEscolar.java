@@ -44,7 +44,7 @@ public class SistemaEscolar {
     }
 
     //cadastrar turma
-    private void cadastrarTurma(){
+    private void cadastrarTurma() throws Exception{
         Turma t = new Turma();
         System.out.println("Cadastro de Turma");
         System.out.println("Numero da Turma");
@@ -85,7 +85,7 @@ public class SistemaEscolar {
     private void listarTurmas(){
         System.out.println("---------------------");
         System.out.println("Relatorio de turma");
-        for(int i = 0; i < this.e1.getQtdeTurmas; i++){
+        for(int i = 0; i < this.e1.getQtdeTurmas(); i++){
             System.out.println("Numero: " + this.e1.getTurma(i).getNumeroTurma()
             + " - Curso: " + e1.getTurma(i).getNomeCurso()
             + " - Ano: " + e1.getTurma(i).getAno());
@@ -93,7 +93,7 @@ public class SistemaEscolar {
     }
 
     //consultar turma
-    private void consultarTurma(){
+    private void consultarTurma() throws Exception{
         System.out.println("----------------------");
         System.out.println("Consulta de turma");
         System.out.println("Numero da turma");
@@ -101,7 +101,7 @@ public class SistemaEscolar {
         boolean achou = false;
 
         for(int i = 0; i < this.e1.getQtdeTurmas(); i++){
-            Turma t = this.e1.getTurma();
+            Turma t = this.e1.getTurma(i);
             if(t.getNumeroTurma() == numTurma){
                 System.out.println("Alunos da turma");
                 int posAluno = 0;
