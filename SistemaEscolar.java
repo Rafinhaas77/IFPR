@@ -112,7 +112,12 @@ public class SistemaEscolar {
                     System.out.println(linha);
                     posAluno++;
                 }
+                achou = true;
+                break;
             }
+        }
+        if(!achou){
+            System.out.println("Turma não encontrada");
         }
     }
 }
