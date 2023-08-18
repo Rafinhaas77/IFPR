@@ -15,13 +15,12 @@ public class ExEscritaArquivo {
         arqGravacao.write(linha);
         arqGravacao.newLine();
 
-        String nomeProduto = "Mouse";
-        String preco = "123.45";
-        String estoque = "35";
-        String linha = nomeProduto + ";" + preco + ";" + estoque;
+        nomeProduto = "Teclado";
+        preco = "543.21";
+        estoque = "53";
+        linha = nomeProduto + ";" + preco + ";" + estoque;
         arqGravacao.write(linha);
-        arqGravacao.newLine();
-
+        arqGravacao.close();
 
     }
 }

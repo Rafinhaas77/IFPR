@@ -1,3 +1,4 @@
+package Exemplos;
 public class Vetores{
     public static void main(String[] args) {
         // Os vetores são estruturas homogêneas (só armazena dados de mesmo tipo)
