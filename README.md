@@ -1,2 +1,0 @@
-# IFPR
-Estudos no IFPR
