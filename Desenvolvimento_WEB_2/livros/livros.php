@@ -1,5 +1,14 @@
 <?php 
 
+$msgErro = '';
+$titulo = '';
+$genero = '';
+$qtd_pag = '';
+$autor = '';
+
+
+//validar se o numero de paginas é maior que zero
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -13,21 +22,39 @@ if(isset($_POST['submetido'])) {
     $qtd_pag = $_POST['qtd_pag'];
     $autor = $_POST['autor'];
 
-    $id = vsprintf( '%s%s-%s-%s-%s-%s%s%s',
-            str_split(bin2hex(random_bytes(16)), 4) );
+    if(! trim($titulo)){
+        $msgErro = 'Informe um titulo';
+    }else if(! $genero){
+        $msgErro = 'Informe um genero';
+    }else if(! trim($autor)){
+        $msgErro = 'Informe um autor';
+    }
+    else if($qtd_pag <= 0){
+        $msgErro = 'Informe um n° de paginas maior que 0';
+    
+    }else if(strlen($titulo) <= 3 || strlen($titulo) >= 50){
+        $msgErro = 'Informe título do livro com no mínimo 3 e no máximo 50 caracteres';
+    
+    }else{
+        $id = vsprintf( '%s%s-%s-%s-%s-%s%s%s',
+        str_split(bin2hex(random_bytes(16)), 4) );
 
-    $livro = array('id' => $id,
-                   'titulo' => $titulo,
-                   'genero' => $genero,
-                   'paginas' => $qtd_pag,
-                   'autor' => $autor);
-    array_push($livros, $livro);
+        $livro = array('id' => $id,
+                'titulo' => $titulo,
+                'genero' => $genero,
+                'paginas' => $qtd_pag,
+                'autor' => $autor);
+        array_push($livros, $livro);
 
-    //Persistir o array livros no arquivo
-    salvarDados($livros);
+        //Persistir o array livros no arquivo
+        salvarDados($livros);
+    }
+
 }
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,28 +68,30 @@ if(isset($_POST['submetido'])) {
 
     <h3>Formulário de livros</h3>
     <form action="" method="POST">
-        <input type="text" name="titulo" 
+        <input type="text" name="titulo" value="<?php echo $titulo ?>"
             placeholder="Informe o título" />
         
         <br><br>
 
         <select name="genero">
             <option value="">---Selecione o gênero---</option>
-            <option value="D">Drama</option>
-            <option value="F">Ficção</option>
-            <option value="R">Romance</option>
-            <option value="O">Outro</option>
+            <option value="D" <?php if($genero == 'D'){ echo 'selected'; } ?>
+                >Drama</option>
+            <option value="F" <?php echo ($genero == 'F' ? 'selected' : '')  ?>
+                >Ficção</option>
+            <option value="R" <?php if($genero == 'R'){ echo 'selected'; } ?>
+                >Romance</option>
+            <option value="O" <?php if($genero == 'O'){ echo 'selected'; } ?>
+                >Outro</option>
         </select>
 
         <br><br>
 
-        <input type="number" name="qtd_pag" 
-            placeholder="Informe a quantidade de páginas" />
+        <input type="number" name="qtd_pag" placeholder="Informe a quantidade de páginas" value="<?php echo $qtd_pag ?>" />
 
         <br><br>
 
-        <input type="text" name="autor" 
-            placeholder="Informe o autor" />
+        <input type="text" name="autor" placeholder="Informe o autor" value="<?php echo $autor ?>"/>
 
         <br><br>
 
@@ -71,6 +100,8 @@ if(isset($_POST['submetido'])) {
         <button type="submit">Gravar</button>
         <button type="reset">Limpar</button>
     </form>
+    
+    <div style="color : red;"> <?php echo $msgErro ?> </div>
 
     <h3>Listagem de livros</h3>
     <table border="1">
